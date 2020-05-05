@@ -15,20 +15,6 @@ export default {
             ]
         },
         {
-            title: 'Difficulty',
-            name: 'difficulty',
-            type: 'string',
-            options: {
-                list: [
-                    { title: 'Easy', value: 'easy' },
-                    { title: 'Medium', value: 'medium' },
-                    { title: 'Hard', value: 'hard' },
-                ],
-                layout: 'radio',
-                direction: 'horizontal'
-            },
-        },
-        {
             title: 'Ready in',
             name: 'readyIn',
             type: 'string',
