@@ -1,26 +1,20 @@
 import React from 'react'
-import propTypes from 'prop-types'
-import sanityClient from '@sanity/client'
+import PropTypes from 'prop-types'
+import client from 'part:@sanity/base/client'
 import imageUrlBuilder from '@sanity/image-url'
 
-//Validate props
-FlexImages.propTypes = {
-    value: propTypes.object
-}
-
+/**
+ * FlexImages component
+ */
 export default function FlexImages(props) {
     const { images, caption } = props.value
 
     //Set up 
-    const builder = imageUrlBuilder(sanityClient({
-        projectId: "s1s9nwnc",
-        dataset: "development",
-        useCdn: true
-    }));
+    const builder = imageUrlBuilder(client)
 
     //Computed values
-    const imagesNumber = images && images.length;
-    const imageWidthUrl = images && Math.floor(700 / imagesNumber);
+    const imagesNumber = images && images.length
+    const imageWidthUrl = images && Math.floor(700 / imagesNumber)
 
     //Styles
     const rowStyles = {
@@ -53,4 +47,14 @@ export default function FlexImages(props) {
             {caption && <p style={pStyles}>{caption}</p>}
         </>
     )
+}
+
+/**
+ * PropTypes
+ */
+FlexImages.propTypes = {
+    value: PropTypes.shape({
+        images: PropTypes.array,
+        caption: PropTypes.string
+    })
 }
