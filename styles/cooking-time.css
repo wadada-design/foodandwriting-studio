@@ -1,0 +1,32 @@
+.cookingTime {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.cookingTimeInput {
+    text-align: center;
+    height: 1.5em;
+    border: none;
+    border-bottom: 1px solid #aaa;
+    margin-top: 3px;
+    margin-right: 5px;
+    transition: border-bottom-color 0.3s ease;
+}
+
+.cookingTimeInput[value]:not([value=""]) {
+    border-bottom-color: #111;
+}
+
+/* HIDE NUMBER INPUT SPINNERS */
+/* Chrome, Safari, Edge, Opera */
+.cookingTimeInput::-webkit-outer-spin-button,
+.cookingTimeInput::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+.cookingTimeInput[type=number] {
+    -moz-appearance: textfield;
+}

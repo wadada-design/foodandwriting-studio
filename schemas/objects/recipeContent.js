@@ -1,4 +1,5 @@
 import { MdShortText, MdDone } from 'react-icons/md'
+import CookingTime from '../../components/CookingTime'
 
 export default {
     title: 'Recipe content',
@@ -18,6 +19,8 @@ export default {
             title: 'Ready in',
             name: 'readyIn',
             type: 'string',
+            inputComponent: CookingTime,
+            validation: Rule => Rule.required().custom(timeStr => timeStr !== "0:0").error('Please add a cooking time')
         },
         {
             title: 'Shopping list',

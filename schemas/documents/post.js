@@ -31,13 +31,11 @@ export default {
         {
             title: 'Date',
             name: 'date',
-            type: 'datetime',
+            type: 'date',
             fieldset: 'meta',
             description: 'Posts will be ordered by date. The date won\'t always be shown on the front end (i.e for recipes)',
             options: {
                 dateFormat: 'DD/MM/YYYY',
-                timeFormat: 'HH:mm',
-                timeStep: 60
             },
             validation: Rule => [
                 Rule.required().error('Please add a date')
@@ -91,7 +89,7 @@ export default {
             type: 'array',
             of: [
                 { type: 'defaultContent', },
-                { type: 'recipeContent'},
+                { type: 'recipeContent' },
             ],
             options: {
                 sortable: false,
@@ -108,12 +106,12 @@ export default {
             description: 'If less than 3 are chosen, posts from the same category will fill the related posts up to 3',
             type: 'array',
             of: [
-                { 
-                    type: 'reference', 
-                    to: [ { type: 'post' } ],
+                {
+                    type: 'reference',
+                    to: [{ type: 'post' }],
                     options: {
                         // Filter out this post
-                        filter: ({ document: { title }  }) => ({ filter: 'title != $title', params: { title: title } })
+                        filter: ({ document: { title } }) => ({ filter: 'title != $title', params: { title: title } })
                     }
                 }
             ],
@@ -124,11 +122,11 @@ export default {
     ],
     orderings: [
         {
-          title: 'Date',
-          name: 'sortDate',
-          by: [
-            {field: 'date', direction: 'desc'}
-          ]
+            title: 'Date',
+            name: 'sortDate',
+            by: [
+                { field: 'date', direction: 'desc' }
+            ]
         },
     ],
     preview: {
