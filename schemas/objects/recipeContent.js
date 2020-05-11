@@ -37,26 +37,17 @@ export default {
         {
             title: 'Recipe intro',
             name: 'recipeIntro',
-            type: 'text',
-            rows: 8,
+            type: 'portableText',
         },
         {
             title: 'Recipe steps',
             name: 'steps',
-            type: 'array',
-            description: 'Add items and rearrange them by dragging the icon on the left. No need to add numbers at the start of each item.',
-            of: [
-                {
-                    type: 'text',
-                    rows: 3,
-                }
-            ]
+            type: 'portableText',
         },
         {
             title: 'Notes',
             name: 'recipeNotes',
-            type: 'text',
-            rows: 8,
+            type: 'portableText',
         },
     ],
     preview: {
