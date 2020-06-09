@@ -51,6 +51,13 @@ export default {
             validation: Rule => Rule.required().error('Missing instagram handle')
         },
         {
+            title: 'Twitter handle',
+            name: 'twitterHandle',
+            type: 'string',
+            fieldset: 'social',
+            validation: Rule => Rule.required().error('Missing twitter handle')
+        },
+        {
             title: 'Social media image',
             name: 'socialMediaImage',
             type: 'image',
