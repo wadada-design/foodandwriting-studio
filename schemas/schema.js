@@ -5,39 +5,45 @@ import createSchema from 'part:@sanity/base/schema-creator'
 import schemaTypes from 'all:part:@sanity/base/schema-type'
 
 // Documents
-import { 
-    config, 
-    about,  
-    home, 
+import {
+    config,
+    about,
+    home,
     post,
     category,
+    contact,
+    cookies,
 } from './documents'
 
 // Objects
-import { 
-    flexImages, 
-    portableText, 
-    shoppingListItem, 
-    imageWithAlt, 
+import {
+    flexImages,
+    portableText,
+    shoppingListItem,
+    imageWithAlt,
     defaultContent,
-    recipeContent
+    recipeContent,
+    cookie,
 } from './objects'
 
 export default createSchema({
     name: 'default',
     types: schemaTypes.concat([
         //Documents
-        post, 
-        about, 
-        config, 
-        home, 
+        post,
+        about,
+        config,
+        home,
         category,
+        contact,
+        cookies,
         //Objects
-        flexImages, 
-        portableText, 
-        shoppingListItem, 
-        imageWithAlt, 
-        defaultContent, 
+        flexImages,
+        portableText,
+        shoppingListItem,
+        imageWithAlt,
+        defaultContent,
         recipeContent,
+        cookie,
     ])
 })
