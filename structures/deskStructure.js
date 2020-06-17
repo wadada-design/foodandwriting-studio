@@ -2,7 +2,7 @@ import S from '@sanity/desk-tool/structure-builder'
 import EyeIcon from 'part:@sanity/base/eye-icon'
 import EditIcon from 'part:@sanity/base/edit-icon'
 import { MdLibraryBooks, MdSettings, MdPerson, MdEmail, MdInfo, MdCollectionsBookmark, MdHome, MdFilterNone } from 'react-icons/md'
-import About from '../components/previews/About'
+import IframePreview from '../components/IFramePreview'
 
 export default () =>
     S.list().title('Admin').items([
@@ -25,7 +25,7 @@ export default () =>
                 .schemaType('about')
                 .views([
                     S.view.form().icon(EditIcon),
-                    S.view.component(About).icon(EyeIcon).title('Preview'),
+                    S.view.component(IframePreview).icon(EyeIcon).title('Preview'),
                 ])
         ),
 
