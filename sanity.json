@@ -13,7 +13,9 @@
     "@sanity/default-layout",
     "@sanity/default-login",
     "@sanity/desk-tool",
-    "seo-tools"
+    "seo-tools",
+    "@sanity/dashboard",
+    "dashboard-widget-netlify"
   ],
   "env": {
     "development": {
@@ -49,6 +51,10 @@
     {
       "implements": "part:@sanity/base/theme/variables/override-style",
       "path": "./styles/variables.css"
+    },
+    {
+      "implements": "part:@sanity/dashboard/config",
+      "path": "./structures/dashboardConfig.js"
     }
   ]
 }
