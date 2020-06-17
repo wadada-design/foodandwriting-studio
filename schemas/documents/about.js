@@ -40,6 +40,15 @@ export default {
             fieldset: 'mainContent',
         },
         {
+            title: 'Title',
+            name: 'title',
+            type: 'string',
+            fieldset: 'mainContent',
+            validation: Rule => [
+                Rule.required().error('Title is required')
+            ]
+        },
+        {
             title: 'Content',
             name: 'content',
             type: 'portableText',
