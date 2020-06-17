@@ -1,9 +1,9 @@
 import S from '@sanity/desk-tool/structure-builder'
-import { MdLibraryBooks, MdSettings, MdPerson, MdCollectionsBookmark, MdHome, MdFilterNone } from 'react-icons/md'
+import { MdLibraryBooks, MdSettings, MdPerson, MdEmail, MdInfo, MdCollectionsBookmark, MdHome, MdFilterNone } from 'react-icons/md'
 
 export default () =>
-    S.list().title('Admin') .items([
-        
+    S.list().title('Admin').items([
+
         // Homepage
         S.listItem().title('Home').icon(MdHome).child(
 
@@ -18,6 +18,13 @@ export default () =>
             S.editor().title('About').id('about').schemaType('about'),
         ),
 
+        // Contact
+        S.listItem().title('Contact').icon(MdEmail).child(
+
+            // Contact editor
+            S.editor().title('Contact').id('contact').schemaType('contact'),
+        ),
+
         // Divider 
         S.divider(),
 
@@ -27,7 +34,7 @@ export default () =>
 
                 // All posts
                 S.listItem().title('All posts').icon(MdLibraryBooks).child(
-                    S.documentTypeList('post').title('All posts').defaultOrdering([{field: 'postMeta.date', direction: 'desc'}])
+                    S.documentTypeList('post').title('All posts').defaultOrdering([{ field: 'postMeta.date', direction: 'desc' }])
                 ),
 
                 // Divider
@@ -53,19 +60,21 @@ export default () =>
 
                 // List out project documents where the _id for the selected
                 S.documentList().schemaType('post').title('Posts').filter('_type == "post" && category._ref == $catId').params({ catId }).initialValueTemplates([
-                    S.initialValueTemplateItem('post-in-category', {catId})
-                  ])
+                    S.initialValueTemplateItem('post-in-category', { catId })
+                ])
             )
         ),
-
-        // Divider
-        S.divider(),
 
         // Categories
         S.documentTypeListItem('category').title('Categories').icon(MdCollectionsBookmark),
 
         // Divider
         S.divider(),
+
+        // Config
+        S.listItem().title('Cookies').icon(MdInfo).child(
+            S.editor().title('Cookies').id('cookies').schemaType('cookies'),
+        ),
 
         // Config
         S.listItem().title('Global config').icon(MdSettings).child(
