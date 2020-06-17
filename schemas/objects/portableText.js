@@ -29,6 +29,8 @@ export default {
                                     { type: 'post' },
                                     { type: 'category' },
                                     { type: 'about' },
+                                    { type: 'contact' },
+                                    { type: 'cookies' },
                                 ],
                                 validation: Rule => [
                                     Rule.required().error('Missing link')
@@ -48,11 +50,10 @@ export default {
                                 title: 'URL',
                                 name: 'href',
                                 type: 'url',
-                                description: 'e.g. https://google.com',
-                                validation: Rule => [
-                                    Rule.uri({ allowRelative: true, scheme: ['https', 'http', 'mailto', 'tel'] }),
-                                    Rule.required().error('Missing link')
-                                ]
+                                description: 'e.g. https://google.com or mailto:example@gmail.com',
+                                validation: Rule => Rule.uri({
+                                    scheme: ['http', 'https', 'mailto', 'tel']
+                                }).required().error('Enter a valid link address'),
                             },
                         ]
                     }
