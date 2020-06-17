@@ -1,5 +1,8 @@
 import S from '@sanity/desk-tool/structure-builder'
+import EyeIcon from 'part:@sanity/base/eye-icon'
+import EditIcon from 'part:@sanity/base/edit-icon'
 import { MdLibraryBooks, MdSettings, MdPerson, MdEmail, MdInfo, MdCollectionsBookmark, MdHome, MdFilterNone } from 'react-icons/md'
+import About from '../components/previews/About'
 
 export default () =>
     S.list().title('Admin').items([
@@ -14,8 +17,16 @@ export default () =>
         // About
         S.listItem().title('About').icon(MdPerson).child(
 
-            // About editor
-            S.editor().title('About').id('about').schemaType('about'),
+            // // About editor
+            // S.editor().title('About').id('about').schemaType('about'),
+
+            S.document()
+                .documentId('about')
+                .schemaType('about')
+                .views([
+                    S.view.form().icon(EditIcon),
+                    S.view.component(About).icon(EyeIcon).title('Preview'),
+                ])
         ),
 
         // Contact
