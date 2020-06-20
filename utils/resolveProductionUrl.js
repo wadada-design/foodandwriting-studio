@@ -1,7 +1,7 @@
 import client from 'part:@sanity/base/client'
 
 export default function resolveProductionUrl(document) {
-    if (document._type !== 'about' && document._type !== 'contact') {
+    if (!['contact', 'about', 'post', 'cookies'].includes(document._type)) {
         return undefined
     }
 
