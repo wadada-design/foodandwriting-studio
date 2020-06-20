@@ -70,6 +70,9 @@ export default {
             name: 'featuredImage',
             type: 'imageWithAlt',
             fieldset: 'meta',
+            validation: Rule => [
+                Rule.required().error('Image required')
+            ]
         },
         {
             title: 'SEO Description',
