@@ -8,7 +8,7 @@ import styles from './Status.css'
 
 const Status = ({ lastUpdated, refreshNetlifyState }) => {
     // Instantiate deploy state
-    const [buildState, setBuildState] = useState({ loading: false, build: null })
+    const [buildState, setBuildState] = useState({ loading: false, build: null, checkedForBuild: false })
 
     const updateSite = async () => {
         if (buildState.loading) {
@@ -21,14 +21,32 @@ const Status = ({ lastUpdated, refreshNetlifyState }) => {
             const id = build.data.id
             // Get build info
             const buildStatus = await netlifyClient.get(`/builds/${id}`)
-            setBuildState({ loading: true, build: buildStatus.data })
+            setBuildState(prevState => ({ ...prevState, loading: true, build: buildStatus.data }))
         } catch (err) {
             console.log(err)
         }
     }
 
+    const checkForCurrentBuild = async () => {
+        // Check if the site is currently being built
+        const buildCheck = await netlifyClient.get(`/sites/${process.env.SANITY_STUDIO_NETLIFY_SITE_ID}`)
+
+        if (buildCheck.data.state !== 'building') {
+            return setBuildState(prevState => ({ ...prevState, checkedForBuild: true }))
+        }
+
+        // Get current site build id
+        const buildList = await netlifyClient.get(`https://api.netlify.com/api/v1/sites/${process.env.SANITY_STUDIO_NETLIFY_SITE_ID}/builds`)
+        const currentBuild = buildList.data[0]
+        setBuildState({ loading: true, build: currentBuild, checkedForBuild: true })
+    }
+
     // Create loop to check build status
     useEffect(() => {
+        if (!buildState.checkedForBuild) {
+            checkForCurrentBuild()
+        }
+
         if (!buildState.loading) {
             return
         }
@@ -40,7 +58,7 @@ const Status = ({ lastUpdated, refreshNetlifyState }) => {
             if (checkStatus.data.done) {
                 clearInterval(check)
                 refreshNetlifyState()
-                setBuildState({ loading: false, build: checkStatus.data })
+                setBuildState(prevState => ({ ...prevState, loading: false, build: checkStatus.data }))
             }
         }, 10000)
 
