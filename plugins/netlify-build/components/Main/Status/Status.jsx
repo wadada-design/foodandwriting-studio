@@ -28,17 +28,30 @@ const Status = ({ lastUpdated, refreshNetlifyState }) => {
     }
 
     const checkForCurrentBuild = async () => {
-        // Check if the site is currently being built
-        const buildCheck = await netlifyClient.get(`/sites/${process.env.SANITY_STUDIO_NETLIFY_SITE_ID}`)
+        try {
+            // Check if the site is currently being built
+            const buildCheck = await netlifyClient.get(`/sites/${process.env.SANITY_STUDIO_NETLIFY_SITE_ID}`)
 
-        if (buildCheck.data.state !== 'building') {
-            return setBuildState(prevState => ({ ...prevState, checkedForBuild: true }))
+            if (buildCheck.data.state !== 'building') {
+                return setBuildState(prevState => ({ ...prevState, checkedForBuild: true }))
+            }
+
+            // Get current site build id
+            const buildList = await netlifyClient.get(`https://api.netlify.com/api/v1/sites/${process.env.SANITY_STUDIO_NETLIFY_SITE_ID}/builds`)
+            const currentBuild = buildList.data[0]
+            setBuildState(prevState => ({ ...prevState, loading: true, build: currentBuild, checkedForBuild: true }))
+        } catch (err) {
+            console.log(err)
         }
+    }
 
-        // Get current site build id
-        const buildList = await netlifyClient.get(`https://api.netlify.com/api/v1/sites/${process.env.SANITY_STUDIO_NETLIFY_SITE_ID}/builds`)
-        const currentBuild = buildList.data[0]
-        setBuildState({ loading: true, build: currentBuild, checkedForBuild: true })
+    const cancelDeploy = async () => {
+        try {
+            await netlifyClient.post(`https://api.netlify.com/api/v1/deploys/${buildState.build.deploy_id}/cancel`)
+            setBuildState(prevState => ({ ...prevState, cancelled: true }))
+        } catch (err) {
+            console.log(error)
+        }
     }
 
     // Create loop to check build status
@@ -61,6 +74,12 @@ const Status = ({ lastUpdated, refreshNetlifyState }) => {
                 setBuildState(prevState => ({ ...prevState, loading: false, build: checkStatus.data }))
             }
         }, 10000)
+
+        if (buildState.cancelled) {
+            clearInterval(check)
+            refreshNetlifyState()
+            setBuildState(prevState => ({ ...prevState, loading: false, build: null, cancelled: false }))
+        }
 
         return () => {
             clearInterval(check)
@@ -90,10 +109,15 @@ const Status = ({ lastUpdated, refreshNetlifyState }) => {
         <div>
             <div className={styles.meta}>
                 <span className={styles.lastUpdated}>Last updated: <b>{lastUpdatedString}</b></span>
-                <button onClick={updateSite} className={`${styles.updateBtn} ${buildState.loading ? styles.loading : ''}`}>
-                    {buildState.loading ? 'Updating' : 'Update site'}
-                    {buildState.loading ? <GrUpdate /> : <FiArrowUpCircle />}
-                </button>
+                {buildState.checkedForBuild && (
+                    <button onClick={updateSite} className={`${styles.updateBtn} ${buildState.loading ? styles.loading : ''}`}>
+                        {buildState.loading ? 'Updating' : 'Update site'}
+                        {buildState.loading ? <GrUpdate /> : <FiArrowUpCircle />}
+                    </button>
+                )}
+                {buildState.loading && (
+                    <button onClick={cancelDeploy} className={styles.cancelBtn}>Cancel update</button>
+                )}
             </div>
             {(buildState.loading || (buildState.build && buildState.build.done)) && (
                 <p className={styles.buildStatus}>Status: {getStatus(buildState.loading, buildState.build.done, buildState.build.error)}</p>
