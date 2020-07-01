@@ -10,10 +10,10 @@ export default {
                 title: 'Deploys',
                 sites: [
                     {
-                        title: 'Staging',
+                        title: 'Website',
                         apiId: '5b6f1496-8d62-4da7-8a2e-ebaed90fa338',
                         buildHookId: '5ee3a31ad71752cd16c5bc7f',
-                        name: 'feature-website-1-0--foodandwriting'
+                        name: 'foodandwriting'
                     }
                 ]
             }

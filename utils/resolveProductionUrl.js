@@ -7,7 +7,7 @@ export default function resolveProductionUrl(document) {
 
     const baseUrl = client.clientConfig.dataset === 'development'
         ? 'http://localhost:8000'
-        : 'https://feature-website-1-0.foodandwriting.co.uk'
+        : 'https://foodandwriting.co.uk'
 
     return `${baseUrl}/preview?_id=${document._id}&_type=${document._type}`
 }
