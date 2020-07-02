@@ -10,6 +10,7 @@ const Main = () => {
 
     const refreshNetlifyState = useCallback(async () => {
         const { data } = await netlifyClient.get(`/sites/${process.env.SANITY_STUDIO_NETLIFY_SITE_ID}`)
+        console.log(data)
         setNetlifyState(data)
     },
         [setNetlifyState],
@@ -25,7 +26,7 @@ const Main = () => {
     }, [])
 
     // Compute variables
-    const lastUpdated = netlifyState ? netlifyState.published_deploy.updated_at : null
+    const lastUpdated = netlifyState ? netlifyState.published_deploy.published_at : null
 
     return (
         <div className={styles.container}>
