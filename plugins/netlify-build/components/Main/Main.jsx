@@ -10,7 +10,6 @@ const Main = () => {
 
     const refreshNetlifyState = useCallback(async () => {
         const { data } = await netlifyClient.get(`/sites/${process.env.SANITY_STUDIO_NETLIFY_SITE_ID}`)
-        console.log(data)
         setNetlifyState(data)
     },
         [setNetlifyState],
