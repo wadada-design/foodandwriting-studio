@@ -7,12 +7,7 @@ import schema from 'part:@sanity/base/schema'
 import styles from './Documents.css'
 
 // Get all document types from sanity
-const getDocumentTypeNames = () => {
-    return schema.getTypeNames()
-        .map(typeName => schema.get(typeName))
-        .filter(type => type.type && type.type.name === 'document')
-        .map(type => type.name)
-}
+const documentTypes = ['post', 'category', 'home', 'about', 'contact', 'cookies', 'config']
 
 const Documents = ({ lastUpdated }) => {
     // Return empty while loading
@@ -26,7 +21,7 @@ const Documents = ({ lastUpdated }) => {
     // Get the recently updated documents
     useEffect(() => {
         (async () => {
-            const documents = await client.fetch('*[!(_id in path("drafts.**")) && _type in $types && _updatedAt > $lastUpdated] | order (_updatedAt desc)', { types: getDocumentTypeNames(), lastUpdated })
+            const documents = await client.fetch('*[!(_id in path("drafts.**")) && _type in $types && _updatedAt > $lastUpdated] | order (_updatedAt desc)', { types: documentTypes, lastUpdated })
             setDocuments(documents)
         })()
     }, [lastUpdated])
