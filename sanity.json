@@ -22,8 +22,9 @@
                 "dataset": "development"
             },
             "plugins": [
-                "@sanity/vision",
-                "example-tool"
+                "comments",
+                "example-tool",
+                "@sanity/vision"
             ]
         }
     },
