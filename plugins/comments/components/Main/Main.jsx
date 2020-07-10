@@ -1,29 +1,26 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useEffect, useReducer } from 'react'
 
 import styles from './Main.css'
-import Comments from './Comments'
+import { MainContext, mainReducer } from './Main.state'
 import { commentsClient } from '../../utils'
 
 const Main = () => {
-    // Setup comments state
-    const [comments, setComments] = useState(null)
-
-    const getComments = useCallback(async () => {
-        const { data } = await commentsClient.get('/comments')
-        console.log(data)
-    }, [setComments])
+    const [state, dispatch] = useReducer(mainReducer, { comments: null, activePost: null })
 
     useEffect(() => {
-        getComments()
+        (async () => {
+            // Fetch initial comments from api
+            const fetchedComments = await commentsClient.get('/comments')
+            dispatch({ type: 'setComments', payload: fetchedComments.data })
+        })()
     }, [])
 
     return (
         <div className={styles.container}>
             <section>
                 <h2 className={styles.title}>Comments</h2>
-                <button>Refresh</button>
+                {JSON.stringify(state.comments)}
             </section>
-            <Comments />
         </div>
     )
 }
