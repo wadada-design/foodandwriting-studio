@@ -63,6 +63,7 @@ export default {
             type: 'image',
             fieldset: 'social',
             description: 'Image used when sharing the site to social media (posts will use their featured image when shared)',
+            validation: Rule => Rule.required().error('Missing socail media image')
         },
 
     ],
