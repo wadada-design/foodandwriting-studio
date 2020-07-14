@@ -1,6 +1,6 @@
 .docList {
     display: grid;
-    grid-auto-rows: 75px;
+    grid-auto-rows: 120px;
     grid-row-gap: 20px;
     list-style-type: none;
     padding: 0 1em 0 0; 

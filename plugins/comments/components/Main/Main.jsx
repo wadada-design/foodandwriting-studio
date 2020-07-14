@@ -1,19 +1,19 @@
 import React, { useEffect, useReducer } from 'react'
 
 import styles from './Main.css'
-import { MainContext, mainReducer } from './Main.state'
+import { MainContext, mainReducer, initalState } from './Main.state'
 
 import DocumentList from './DocumentList'
 import { commentsClient } from '../../utils'
 
 const Main = () => {
-    const [state, dispatch] = useReducer(mainReducer, { docIds: null, activeDoc: null })
+    const [state, dispatch] = useReducer(mainReducer, initalState)
 
     // Fetch distinct posts with comments
     useEffect(() => {
         (async () => {
             const comments = await commentsClient.get('/comments/posts')
-            dispatch({ type: 'SET_DOC_IDS', payload: comments.data })
+            dispatch({ type: 'SET_DOCS', payload: comments.data })
         })()
     }, [])
 
@@ -24,7 +24,7 @@ const Main = () => {
                     <h2 className={styles.title}>Comments</h2>
                 </section>
                 <section className={styles.postsContainer}>
-                    <DocumentList ids={state.docIds} />
+                    <DocumentList documents={state.documents} />
                 </section>
             </div>
         </MainContext.Provider>
