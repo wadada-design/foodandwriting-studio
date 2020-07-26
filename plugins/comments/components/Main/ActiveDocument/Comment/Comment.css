@@ -1,0 +1,25 @@
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.headerTime {
+    display: inline-flex;
+    align-items: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+.headerTime svg {
+    margin-right: 5px;
+}
+
+/* Comment */
+.commentText {
+    font-size: 1.15rem;
+    font-weight: bold;
+    color: #111;
+    padding-right: 25px;
+}

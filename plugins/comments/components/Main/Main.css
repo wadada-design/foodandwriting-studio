@@ -20,10 +20,28 @@
 .postsContainer {
     flex-grow: 1;
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 10px 2fr;
+    grid-column-gap: 20px;
 }
 
 .postsContainer > * {
     height: 100%;
     overflow-y: scroll;
+}
+
+/* Utils */
+.divider {
+    border-left: 1px solid rgba(80, 80, 80, 0.25);
+}
+
+.noActiveDoc {
+    background: #f8f8f8;
+    border-radius: 7px;
+    font-size: 14.4px;
+    font-size: 0.9rem;
+    padding: 15px;
+    text-align: center;
+    color: #565656;
+    font-weight: bold;
+    max-height: 1.5rem;
 }

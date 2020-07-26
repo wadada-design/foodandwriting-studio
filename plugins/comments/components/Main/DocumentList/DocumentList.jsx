@@ -1,12 +1,11 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import client from 'part:@sanity/base/client'
 
 import styles from './DocumentList.css'
 
-import { MainContext } from '../Main.state'
+import Preview from './Preview'
 
 const Documents = ({ documents }) => {
-    const context = useContext(MainContext)
     const [listedDocs, setListedDocs] = useState(null)
 
     // Fetch documents from sanity 
@@ -22,28 +21,22 @@ const Documents = ({ documents }) => {
         })()
     }, [documents])
 
-    // Setup dispatch for document click
-    const handleDocumentClick = (id) => {
-        context.dispatch({ type: 'SET_ACTIVE_DOC', payload: id })
-    }
-
     return (
         <div>
-            <h2>Documents</h2>
+            <h2>Posts</h2>
             <ul className={styles.docList}>
                 {(listedDocs && listedDocs.length) && (
                     listedDocs.map(doc => {
                         const activeDoc = documents.filter(stateDoc => stateDoc.post_id === doc._id)[0]
 
-                        return (
-                            <li key={doc._id}>
-                                <button onClick={() => handleDocumentClick(doc._id)}>
-                                    <p>Tile: {doc.title}</p>
-                                    <p>Comments amount: {activeDoc.comments_no}</p>
-                                    <p>Replies amount: {activeDoc.replies_no}</p>
-                                </button>
-                            </li>
-                        )
+                        return <Preview
+                            key={doc._id}
+                            id={doc._id}
+                            title={doc.title}
+                            commentAmount={activeDoc.comments_no}
+                            repliesAmount={activeDoc.replies_no}
+                            doc={doc}
+                        />
                     })
                 )}
             </ul>

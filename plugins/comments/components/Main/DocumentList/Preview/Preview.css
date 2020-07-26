@@ -1,0 +1,64 @@
+/* Preview component wrapper */
+.docPreview {
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    background-color: #f2f2f2;
+}
+
+.docPreview:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.docPreview:hover, 
+.docPreview:focus {
+    background-color: #eaeaea;
+}
+
+.docPreviewActive {
+    composes: docPreview;
+    background-color: #111 !important;
+}
+
+.docPreviewActive a > * {
+    color: white;
+}
+
+/* Preview link */
+.docPreviewLink {
+    display: block;
+    padding: 25px 15px;
+    text-decoration: none;
+}   
+
+.docPreviewLink > * {
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+.docPreviewLink > *:not(:first-child) {
+    margin-top: 10px;
+}
+
+.docPreviewLinkTitle {
+    font-size: 1rem;
+}
+
+/* Icons */
+.docPreviewIconWrapper {
+    display: inline-flex;
+}
+
+.docPreviewIconWrapperItem {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.docPreviewIconWrapperItem:not(:last-child) {
+    margin-right: 15px;
+}
+
+.docPreviewIconWrapperItem svg {
+    margin-right: 5px;
+}

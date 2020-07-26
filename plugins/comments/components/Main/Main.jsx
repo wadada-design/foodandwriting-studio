@@ -4,6 +4,7 @@ import styles from './Main.css'
 import { MainContext, mainReducer, initalState } from './Main.state'
 
 import DocumentList from './DocumentList'
+import ActiveDocument from './ActiveDocument'
 import { commentsClient } from '../../utils'
 
 const Main = () => {
@@ -25,6 +26,11 @@ const Main = () => {
                 </section>
                 <section className={styles.postsContainer}>
                     <DocumentList documents={state.documents} />
+                    <div className={styles.divider}></div>
+                    {state.activeDoc ?
+                        <ActiveDocument doc={state.activeDoc} />
+                        : <div className={styles.noActiveDoc}>Click a post to view the comments</div>
+                    }
                 </section>
             </div>
         </MainContext.Provider>
