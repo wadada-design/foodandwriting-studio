@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import moment from 'moment'
-import { FaRegClock, FaTrashAlt, FaUserAlt } from 'react-icons/fa'
+import { FaRegClock, FaRegTrashAlt, FaUserAlt } from 'react-icons/fa'
 
 import styles from './Comment.css'
 
@@ -16,15 +16,18 @@ export default ({ comment: { date, display_name, text, replies, verified, approv
         <article>
             <header className={styles.header}>
                 <time dateTime={date} className={styles.headerTime}><FaRegClock /> {time}</time>
-                <button>Delete <FaTrashAlt /></button>
+                <button className={styles.deleteBtn}><FaRegTrashAlt /></button>
             </header>
             <section>
                 <p className={styles.commentText}>"{text}"</p>
-                <p><FaUserAlt /> {display_name} <span>{verifiedBadgeText}</span></p>
+                <p className={styles.commentAuthor}>
+                    - {display_name}
+                    <span className={verified ? styles.verifiedBadge : styles.unverifiedBadge}>{verifiedBadgeText}</span>
+                </p>
             </section>
-            <footer>
-                <button>Approve</button>
-                <button>Reply</button>
+            <footer className={styles.footer}>
+                <button className={styles.approveBtn}>Approve</button>
+                <button className={styles.replyBtn} disabled={!approved}>Reply</button>
             </footer>
         </article>
     )

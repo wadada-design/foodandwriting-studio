@@ -16,10 +16,77 @@
     margin-right: 5px;
 }
 
-/* Comment */
+/* Comment text */
 .commentText {
     font-size: 1.15rem;
     font-weight: bold;
     color: #111;
     padding-right: 25px;
+}
+
+/* Comment author */
+.commentAuthor {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    color: #111;
+}
+
+.commentAuthor span {
+    margin-left: 5px;
+}
+
+/* Verified badge */
+.verifiedBadge {
+    composes: badge from '../../../../css/badge.css';
+    background: #a6dc66;
+    color: #3a521e;
+}
+
+.unverifiedBadge {
+    composes: badge from '../../../../css/badge.css';
+    background: #dcdcdc;
+    color: #565656;
+}
+
+/* Delete btn */
+.deleteBtn {
+    composes: btn from '../../../../css/button.css';
+    background-color: #c33434;
+    padding: 5px;
+}
+
+.deleteBtn:hover,
+.deleteBtn:focus {
+    background-color: #ab1a1a;
+}
+
+.deleteBtn svg {
+    fill: white;
+}
+
+/* Footer + buttons */
+.footer {
+    padding: 5px 0;
+}
+
+.footer > *:not(:last-child) {
+    margin-right: 10px;
+}
+
+.mainBtn {
+    composes: btn from '../../../../css/button.css';
+    padding: 8px 10px;
+}
+
+.approveBtn,
+.replyBtn {
+    composes: mainBtn;
+    background: black;
+    color: white;
+}
+
+.replyBtn:disabled {
+    color: #8c8c8c;
+    background: #cecece;
 }
