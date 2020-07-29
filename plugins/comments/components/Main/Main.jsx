@@ -23,7 +23,7 @@ const Main = () => {
             <div className={styles.container}>
                 <section>
                     <h2 className={styles.title}>Comments</h2>
-                    <p>This is just a demo, functionality has not yet been pushed.</p>
+                    <p>This is just a demo, not all functionality has been pushed.</p>
                 </section>
                 <section className={styles.postsContainer}>
                     <DocumentList documents={state.documents} />

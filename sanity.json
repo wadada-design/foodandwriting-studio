@@ -14,6 +14,7 @@
         "@sanity/default-login",
         "@sanity/desk-tool",
         "@sanity/production-preview",
+        "comments",
         "netlify-build"
     ],
     "env": {
@@ -22,7 +23,6 @@
                 "dataset": "development"
             },
             "plugins": [
-                "comments",
                 "example-tool",
                 "@sanity/vision"
             ]
