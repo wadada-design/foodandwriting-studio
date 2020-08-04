@@ -65,6 +65,10 @@
     fill: white;
 }
 
+.deleteBtn > span {
+    color: white;
+}
+
 /* Footer + buttons */
 .footer {
     padding: 5px 0;

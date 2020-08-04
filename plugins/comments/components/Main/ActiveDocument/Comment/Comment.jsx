@@ -16,7 +16,7 @@ export default ({ comment: { date, display_name, text, replies, verified, approv
         <article>
             <header className={styles.header}>
                 <time dateTime={date} className={styles.headerTime}><FaRegClock /> {time}</time>
-                <button className={styles.deleteBtn}><FaRegTrashAlt /></button>
+                <button className={styles.deleteBtn}><span>Delete</span><FaRegTrashAlt /></button>
             </header>
             <section>
                 <p className={styles.commentText}>"{text}"</p>
